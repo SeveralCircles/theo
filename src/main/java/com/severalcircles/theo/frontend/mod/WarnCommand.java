@@ -9,6 +9,7 @@ import com.severalcircles.theo.frontend.msg.NotAllowedEmbed;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 
+import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,7 +17,7 @@ import java.util.Locale;
 
 public class WarnCommand implements TheoCommand {
     @Override
-    public void execute(SlashCommandInteractionEvent event, TheoUser user) {
+    public void execute(SlashCommandInteractionEvent event, TheoUser user) throws IOException {
         TheoGuild guild = TheoDataManager.getGuild(event.getGuild().getId());
         if (!user.hasPermission(event.getMember(), new WarnCommand())){
             event.replyEmbeds(new NotAllowedEmbed(Locale.forLanguageTag(user.getLocale()), event.getUser()).get()).queue();

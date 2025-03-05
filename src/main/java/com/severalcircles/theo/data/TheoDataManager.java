@@ -24,7 +24,7 @@ public class TheoDataManager {
             e.printStackTrace();
         }
     }
-    public static TheoUser getUser(String id, String guildId) {
+    public static TheoUser getUser(String id, String guildId) throws IOException {
         File userFile = new File(USER_DIR.getAbsolutePath() + "/" + guildId + "/" + id + ".yml");
         Yaml yaml = new Yaml();
         try (FileReader reader = new FileReader(userFile)) {
@@ -38,9 +38,6 @@ public class TheoDataManager {
             }
             e.printStackTrace();
             return new TheoUser(id,guildId, new LinkedList<>(), Locale.getDefault().toLanguageTag());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-
         }
     }
     public static List<TheoUser> getAllForGuild(String guildId) {
