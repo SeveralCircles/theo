@@ -1,0 +1,35 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.severalcircles.theo'
+version = '0.1-alpha'
+def jdaVersion = "5.1.0"
+repositories {
+    mavenCentral()
+}
+tasks.register('createProperties') {
+    dependsOn processResources
+    doLast {
+        new File("$buildDir/resources/main/version.properties").withWriter { w ->
+            Properties p = new Properties()
+            p['version'] = project.version.toString()
+            p.store w, null
+        }
+    }
+}
+
+classes {
+    dependsOn createProperties
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    implementation("net.dv8tion:JDA:$jdaVersion")
+    implementation 'org.yaml:snakeyaml:1.33'
+}
+
+test {
+    useJUnitPlatform()
+}
