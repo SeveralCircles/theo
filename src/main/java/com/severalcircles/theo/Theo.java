@@ -6,7 +6,6 @@ import com.severalcircles.theo.events.MessageEvent;
 import com.severalcircles.theo.frontend.basic.BasedCommand;
 import com.severalcircles.theo.events.SlashCommandEvent;
 import com.severalcircles.theo.frontend.TheoCommand;
-import com.severalcircles.theo.frontend.dev.RefreshRolesCommand;
 import com.severalcircles.theo.frontend.mod.WarnCommand;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -51,8 +50,8 @@ public class Theo {
         // --- Register commands ---
         commandMap.put("based", new BasedCommand());
         commandDataList.add(Commands.slash("based", "You're so based."));
-        commandMap.put("refreshroles", new RefreshRolesCommand());
-        commandDataList.add(Commands.slash("refreshroles", "You're refresh roles."));
+//        commandMap.put("refreshroles", new RefreshRolesCommand());
+//        commandDataList.add(Commands.slash("refreshroles", "You're refresh roles."));
         commandMap.put("warn", new WarnCommand());
         commandDataList.add(Commands.slash("warn", "Send private feedback to a user").addOption(OptionType.USER, "user", "Target user", true).addOption(OptionType.STRING, "msg", "The message to attach", true).addOption(OptionType.STRING, "subject", "Message subject", true));
         api.updateCommands()
