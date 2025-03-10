@@ -1,6 +1,8 @@
 package com.severalcircles.theo.data;
 
+import com.severalcircles.theo.data.guild.TheoGuild;
 import com.severalcircles.theo.data.user.TheoUser;
+import org.jetbrains.annotations.NotNull;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.*;
@@ -57,7 +59,7 @@ public class TheoDataManager {
         }
         return userList;
     }
-    public static void saveGuild(TheoGuild guild) {
+    public static void saveGuild(@NotNull TheoGuild guild) {
         File guildFile = new File(GUILD_DIR.getAbsolutePath() + "/" + guild.getId() + ".yml");
         Yaml yaml = new Yaml();
         try (FileWriter writer = new FileWriter(guildFile)) {
@@ -81,7 +83,7 @@ public class TheoDataManager {
                 throw new RuntimeException(ex);
             }
             e.printStackTrace();
-            return new TheoGuild(id, new HashMap<>());
+            return new TheoGuild(id);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

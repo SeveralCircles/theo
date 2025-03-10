@@ -1,7 +1,7 @@
 package com.severalcircles.theo.data.user;
 
 import com.severalcircles.theo.data.TheoDataManager;
-import com.severalcircles.theo.data.TheoGuild;
+import com.severalcircles.theo.data.guild.TheoGuild;
 import com.severalcircles.theo.frontend.TheoCommand;
 import net.dv8tion.jda.api.entities.Member;
 
@@ -14,12 +14,22 @@ public class TheoUser {
     String guildId;
     List<UserWarning> warnings;
     String locale;
+//    PermissionLevel permissionLevel;
+
     public TheoUser(String id, String guildId, List<UserWarning> warnings, String locale) {
         this.id = id;
         this.guildId = guildId;
         this.warnings = warnings;
         this.locale = locale;
     }
+
+//    public PermissionLevel getPermissionLevel() {
+//        return permissionLevel;
+//    }
+
+//    public void setPermissionLevel(PermissionLevel permissionLevel) {
+//        this.permissionLevel = permissionLevel;
+//    }
 
     public String getLocale() {
         return locale;
@@ -60,18 +70,4 @@ public class TheoUser {
         warnings.add(warning);
     }
 
-    public boolean hasPermission(Member user, TheoCommand command) {
-        AtomicBoolean hasPermission = new AtomicBoolean(false);
-        TheoGuild guild = TheoDataManager.getGuild(user.getGuild().getId());
-        if (guild.getPermissions() == null) guild.setPermissions(new HashMap<>());
-        user.getRoles().forEach(role -> {
-            List<String> permissionsForRole = guild.getPermissions().get(role.getId());
-            if (permissionsForRole != null) {
-                permissionsForRole.forEach(perm -> {
-                    if (command.getClass().getName().startsWith(perm)) hasPermission.set(true);
-                });
-            }
-        });
-        return hasPermission.get();
-    }
 }

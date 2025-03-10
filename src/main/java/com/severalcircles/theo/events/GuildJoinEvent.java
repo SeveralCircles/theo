@@ -1,7 +1,7 @@
 package com.severalcircles.theo.events;
 
 import com.severalcircles.theo.data.TheoDataManager;
-import com.severalcircles.theo.data.TheoGuild;
+import com.severalcircles.theo.data.guild.TheoGuild;
 import com.severalcircles.theo.data.user.TheoUser;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Guild;
@@ -26,11 +26,4 @@ public class GuildJoinEvent extends ListenerAdapter {
         });
         super.onGuildJoin(event);
     }
-    public void listRoles(TheoGuild guild, Guild discordGuild) {
-        for (Role role : discordGuild.getRoles()) {
-            // Inherit mod commands from manage messages permission
-            if (role.hasPermission(Permission.MESSAGE_MANAGE)) guild.addPermission(role.getId(), "com.severalcircles.theo.frontend.mod");
-
-        }
     }
-}
