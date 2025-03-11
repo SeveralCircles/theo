@@ -68,6 +68,14 @@ public class TheoUser {
 
     public void addWarning(UserWarning warning) {
         warnings.add(warning);
+        warnings.forEach(System.out::println);
     }
-
+    public String toString() {
+        return "TheoUser{" +
+                "id='" + id + '\'' +
+                ", guildId='" + guildId + '\'' +
+                ", warnings=" + warnings +
+                ", locale='" + locale + '\'' +
+                '}';
+    }
 }

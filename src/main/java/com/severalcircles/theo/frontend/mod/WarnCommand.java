@@ -15,15 +15,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
+import java.util.logging.Logger;
+
 @RequiresPermission("MESSAGE_MANAGE")
 public class WarnCommand implements TheoCommand {
     @Override
     public void execute(SlashCommandInteractionEvent event, TheoUser user) throws IOException {
         TheoGuild guild = TheoDataManager.getGuild(event.getGuild().getId());
 
-        User target = event.getOption("user").getAsUser();
+        User target = Objects.requireNonNull(event.getOption("user")).getAsUser();
         TheoUser targetUser = TheoDataManager.getUser(target.getId(), event.getGuild().getId());
         if (targetUser == null) {
+            Logger.getGlobal().warning("The target user is null");
             targetUser = new TheoUser(target.getId(), event.getGuild().getId(), new ArrayList<>(), "en-US");
             TheoDataManager.saveUser(targetUser);
         }
